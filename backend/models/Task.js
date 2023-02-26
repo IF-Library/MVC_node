@@ -13,10 +13,18 @@ const taskSchema = new Schema({
     },
     date: {
         type: Date,
-        require: true
+        required: true
     },
     isLate: {
         type: Boolean,
         required: false
     }
 }, { timestamps: true });
+
+const Task = moongose.model("Task", taskSchema);
+
+module.exports = {
+    Task,
+    taskSchema
+};
+

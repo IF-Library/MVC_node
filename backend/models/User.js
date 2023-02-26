@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
-const {taskSchema} = require("./Task");
+const { taskSchema } = require("./Task");
 
 const userSchema = new Schema({
-    name :{
-        type : String,
+    name: {
+        type: String,
         required: true
     },
     email: {
@@ -21,4 +21,9 @@ const userSchema = new Schema({
         type: [taskSchema],
         required: false
     }
-})
+}, { timestamps: true })
+
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
+
