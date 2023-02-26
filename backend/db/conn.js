@@ -1,11 +1,11 @@
-const mongoose = require("moongose");
+const mongoose = require("mongoose");
 
 // entregar uma porta
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD);
-
+const DB_USER = "fam";
+const DB_PASSWORD = encodeURIComponent("ewDN8UuXRrMGMm6G");
 const main = async () => {
     try {
+        mongoose.set("strictQuery", true);
         await mongoose.connect(
             `mongodb+srv://${DB_USER}:${DB_PASSWORD}@apilibrary.fg1g4xd.mongodb.net/?retryWrites=true&w=majority`
         );
