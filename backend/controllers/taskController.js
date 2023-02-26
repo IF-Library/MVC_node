@@ -39,7 +39,7 @@ const taskController = {
     },
     upadate: async (req, res) => {
         try {
-            const id = req.body._id;
+            const id = req.params.id;
             const task = {
                 title: req.body.title,
                 description: req.body.description,
@@ -50,6 +50,7 @@ const taskController = {
 
             if (!response) {
                 res.status(400).json({ msg: "O id informado não foi encontrado na base!" });
+                return
             }
             res.status(200).json({ msg: "A tarefa foi alterada com sucesso!" });
         } catch (error) {
