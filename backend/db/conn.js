@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
 // entregar uma porta
-const DB_USER = "fam";
-const DB_PASSWORD = encodeURIComponent("ewDN8UuXRrMGMm6G");
+ const DB_USER = process.env.DB_USER;
+ const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD);
+
 const main = async () => {
     try {
         mongoose.set("strictQuery", true);
