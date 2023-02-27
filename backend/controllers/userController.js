@@ -6,10 +6,10 @@ const userController = {
     create: async (req, res) => {
         try {
 
-            const {email} = req.body;
+            const { email } = req.body;
 
-            if(await UserModel.findOne({email})){
-                return res.status(400).json({error: true, message:"Email de usuário já existe"});
+            if (await UserModel.findOne({ email })) {
+                return res.status(400).json({ error: true, message: "Email de usuário já existe" });
             }
 
             const user = {
