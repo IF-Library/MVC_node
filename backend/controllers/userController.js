@@ -5,6 +5,13 @@ const userController = {
 
     create: async (req, res) => {
         try {
+
+            const {email} = req.body;
+
+            if(await UserModel.findOne({email})){
+                return res.status(400).json({error: true, message:"Email de usuário já existe"});
+            }
+
             const user = {
                 name: req.body.name,
                 email: req.body.email,
@@ -14,10 +21,10 @@ const userController = {
 
             const response = await UserModel.create(user);
 
-            res.status(200).json({ response, msg: "Usuário criado com sucesso" });
+            res.status(201).json({ response, msg: "Usuário criada com sucesso" });
 
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json({ msg: "Erro ao comunicar com o servidor" });
         }
     },
 
@@ -26,7 +33,7 @@ const userController = {
             const response = await UserModel.find();
             res.status(200).json(response);
         } catch (error) {
-            res.status(500).json({ msg: "Houve algum problema" })
+            res.status(500).json({ msg: "Erro ao comunicar com o servidor" });
         }
     },
 
@@ -36,7 +43,7 @@ const userController = {
             const response = await UserModel.findById(id);
             res.status(200).json(response);
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json({ msg: "Erro ao comunicar com o servidor" });
         }
     },
     update: async (req, res) => {
@@ -50,18 +57,25 @@ const userController = {
             }
             const response = await UserModel.findByIdAndUpdate(id, user);
 
-            res.status(200).json({ response, msg: "Atualizado com sucesso" });
+            if (!response) {
+                res.status(400).json({ msg: "O id informado não foi encontrado na base!" });
+                return
+            }
+            res.status(200).json({ msg: "O usuário foi alterado com sucesso!" });
         } catch (error) {
-            res.status(500).json({ msg: "deu ruim" });
+            res.status(500).json({ msg: "Erro ao comunicar com o servidor" });
         }
     },
     delete: async (req, res) => {
         try {
             const id = req.params.id;
             const response = await UserModel.findByIdAndDelete(id);
-            res.status(200).json({ response, msg: "Usuário deletado com suscesso" });
+            if (!response) {
+                response.status(400).json({ msg: "O id informado não foi encontrado na base!" });
+            }
+            res.status(200).json({ msg: "O usuário foi excluído com sucesso!" });
         } catch (error) {
-            res.status(500).json({ msg: "Um problema ocorreu" });
+            res.status(500).json({ msg: "Erro ao comunicar com o servidor" });
         }
     }
 }

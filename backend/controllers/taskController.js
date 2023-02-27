@@ -60,7 +60,6 @@ const taskController = {
     delete: async (req, res) => {
         try {
             const id = req.params.id;
-            console.log(id)
             const response = await TaskModel.findByIdAndDelete(id);
             if (!response) {
                 response.status(400).json({ msg: "O id informado não foi encontrado na base!" });
