@@ -54,6 +54,15 @@ const userController = {
         } catch (error) {
             res.status(500).json({ msg: "deu ruim" });
         }
+    },
+    delete: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const response = await UserModel.findByIdAndDelete(id);
+            res.status(200).json({ response, msg: "Usuário deletado com suscesso" });
+        } catch (error) {
+            res.status(500).json({ msg: "Um problema ocorreu" });
+        }
     }
 }
 

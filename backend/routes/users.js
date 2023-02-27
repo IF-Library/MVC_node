@@ -9,4 +9,6 @@ router.route("/user/:id").get((req, res) => userController.get(req, res));
 
 router.route("/user/:id").put((req, res) => userController.update(req, res));
 
+router.route("/user/:id").delete((req, res) => userController.delete(req, res));
+
 module.exports = router;
