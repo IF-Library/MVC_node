@@ -20,6 +20,7 @@ const userController = {
             }
 
             const response = await UserModel.create(user);
+            response.password = undefined;
 
             res.status(201).json({ response, msg: "Usuário criada com sucesso" });
 
