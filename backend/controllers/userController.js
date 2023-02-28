@@ -5,7 +5,6 @@ const userController = {
 
     create: async (req, res) => {
         try {
-
             const { email } = req.body;
 
             if (await UserModel.findOne({ email })) {
