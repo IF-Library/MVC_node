@@ -11,5 +11,7 @@ router.route("/task/:id").put((req, res) => taskController.upadate(req, res));
 
 router.route("/task/:id").delete((req, res) => taskController.delete(req, res));
 
+router.route("/task/user/:userId").get((req, res) => taskController.getAllTasksUser(req, res));
+
 module.exports = router;
 

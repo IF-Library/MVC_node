@@ -11,14 +11,12 @@ const userController = {
             if (await UserModel.findOne({ email })) {
                 return res.status(400).json({ error: true, message: "Email de usuário já existe" });
             }
-
             const user = {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
                 tasks: req.body.tasks,
             }
-            
 
             const response = await UserModel.create(user);
             response.password = undefined;
@@ -30,7 +28,7 @@ const userController = {
             let erro = retorno.map((elem) => {
                 return error.errors[elem].message.split("Path ")[1];
             })
-            res.status(500).json({erro , msg: "Erro ao comunicar com o servidor" });
+            res.status(500).json({ erro, msg: "Erro ao comunicar com o servidor" });
         }
     },
 

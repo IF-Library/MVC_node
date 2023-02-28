@@ -9,7 +9,7 @@ const taskController = {
                 description: req.body.description,
                 date: req.body.date,
                 isLate: req.body.isLate,
-                user: req.body.userId,            
+                user: req.body.userId,
             }
 
             const response = await TaskModel.create(task);
@@ -28,6 +28,16 @@ const taskController = {
 
         } catch (error) {
             res.status(500).json({ msg: "Erro ao comunicar com o servidor" });
+        }
+    },
+    getAllTasksUser: async (req, res) => {
+        try {
+            const { userId } = req.params.userId;
+            const response = await TaskModel.find({ userId });
+            res.status(200).json(response);
+
+        } catch (error) {
+            res.status(500).json({ msg: "Erro ao comunicar com servidor" });
         }
     },
     get: async (req, res) => {
