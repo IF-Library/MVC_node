@@ -19,10 +19,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
         select: false,
-    },
-    tasks: {
-        type: [taskSchema],
-        required: false
     }
 }, { timestamps: true })
 

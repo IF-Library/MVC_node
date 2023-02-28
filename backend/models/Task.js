@@ -1,6 +1,6 @@
-const moongose = require("mongoose");
+const mongoose = require("mongoose");
 
-const { Schema } = moongose;
+const { Schema } = mongoose;
 
 const taskSchema = new Schema({
     title: {
@@ -18,10 +18,14 @@ const taskSchema = new Schema({
     isLate: {
         type: Boolean,
         required: false
-    }
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }   
 }, { timestamps: true });
 
-const Task = moongose.model("Task", taskSchema);
+const Task = mongoose.model("Task", taskSchema);
 
 module.exports = {
     Task,

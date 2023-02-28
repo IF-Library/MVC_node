@@ -18,6 +18,7 @@ const userController = {
                 password: req.body.password,
                 tasks: req.body.tasks,
             }
+            
 
             const response = await UserModel.create(user);
             response.password = undefined;
@@ -25,7 +26,11 @@ const userController = {
             res.status(201).json({ response, msg: "Usuário criada com sucesso" });
 
         } catch (error) {
-            res.status(500).json({ msg: "Erro ao comunicar com o servidor" });
+            const retorno = Object.keys(error.errors);
+            let erro = retorno.map((elem) => {
+                return error.errors[elem].message.split("Path ")[1];
+            })
+            res.status(500).json({erro , msg: "Erro ao comunicar com o servidor" });
         }
     },
 

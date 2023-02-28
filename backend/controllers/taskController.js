@@ -1,4 +1,5 @@
 const { Task: TaskModel } = require("../models/Task");
+const mongoose = require("mongoose");
 
 const taskController = {
     create: async (req, res) => {
@@ -8,6 +9,7 @@ const taskController = {
                 description: req.body.description,
                 date: req.body.date,
                 isLate: req.body.isLate,
+                user: req.body.userId,            
             }
 
             const response = await TaskModel.create(task);
