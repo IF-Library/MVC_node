@@ -1,4 +1,3 @@
-const { response } = require("express");
 const { User: UserModel } = require("../models/User");
 
 const userController = {
@@ -8,7 +7,7 @@ const userController = {
             const { email } = req.body;
 
             if (await UserModel.findOne({ email })) {
-                return res.status(400).json({ error: true, message: "Email de usuário já existe" });
+                return res.status().json({ error: true, message: "Email de usuário já existe" });
             }
             const user = {
                 name: req.body.name,

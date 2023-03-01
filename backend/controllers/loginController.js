@@ -4,7 +4,6 @@ const bcryptjs = require("bcryptjs");
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-
 const loginController = {
     login: async (req, res) => {
         try {
@@ -26,13 +25,13 @@ const loginController = {
                 const secret = process.env.SECRET;
                 const token = jwt.sign(
                     {
-                        id: user.id,
+                        id: user._id,
                     },
                     secret
                 );
-                return res.status(200).json({ msg: "Autenticação realizada!" }, token)
+                return res.status(200).json({ msg: "Autenticação realizada", token });
             } catch (error) {
-                return res.status(403).json({ msg: "Falha ao realizar autenticação!" })
+                return res.status(400).json({ msg: "Error ao fazer a autenticação" });
             }
 
         } catch (error) {
@@ -41,19 +40,5 @@ const loginController = {
     }
 }
 
-const authentication = (user) => {
-    try {
-        const secret = process.env.SECRET;
-        const token = jwt.sign(
-            {
-                id: user._id,
-            },
-            secret
-        );
-        return res.status(200).json({ msg: "Autenticação realizada!" }, token)
-    } catch (error) {
-        return res.status(403).json({ msg: "Falha ao realizar autenticação!" })
-    }
-}
 
 module.exports = loginController;
