@@ -32,8 +32,12 @@ const taskController = {
     },
     getAllTasksUser: async (req, res) => {
         try {
-            const { userId } = req.params.userId;
-            const response = await TaskModel.find({ userId });
+            const user = req.params.userId;
+            const response = await TaskModel.find({ user });
+
+            if (response.length === 0) {
+                return res.status(400).json({ msg: "Não foi encontrada nenhuma atividade para este úsuario" })
+            }
             res.status(200).json(response);
 
         } catch (error) {
