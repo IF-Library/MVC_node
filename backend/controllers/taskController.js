@@ -11,10 +11,10 @@ const taskController = {
                 user: req.body.userId,
             }
             const response = await TaskModel.create(task);
-            res.status(201).send({ response, msg: "Tarefa criada com sucesso" });
+            res.status(201).send({ response, message: "Tarefa criada com sucesso" });
 
         } catch (error) {
-            res.status(500).send({ msg: "Erro ao comunicar com o servidor" });
+            res.status(500).send({ message: "Erro ao comunicar com o servidor" });
         }
     },
     getAll: async (req, res) => {
@@ -24,7 +24,7 @@ const taskController = {
             res.status(200).send(response);
 
         } catch (error) {
-            res.status(500).send({ msg: "Erro ao comunicar com o servidor" });
+            res.status(500).send({ message: "Erro ao comunicar com o servidor" });
         }
     },
     getAllTasksUser: async (req, res) => {
@@ -33,12 +33,12 @@ const taskController = {
             const response = await TaskModel.find({ user });
 
             if (response.length === 0) {
-                return res.status(400).send({ msg: "Não foi encontrada nenhuma atividade para este úsuario" })
+                return res.status(400).send({ message: "Não foi encontrada nenhuma atividade para este úsuario" })
             }
             res.status(200).send(response);
 
         } catch (error) {
-            res.status(500).send({ msg: "Erro ao comunicar com servidor" });
+            res.status(500).send({ message: "Erro ao comunicar com servidor" });
         }
     },
     get: async (req, res) => {
@@ -47,7 +47,7 @@ const taskController = {
             const response = await TaskModel.findById(id);
             res.status(200).send(response);
         } catch (error) {
-            res.status(500).send({ msg: "Erro ao comunicar com o servidor" });
+            res.status(500).send({ message: "Erro ao comunicar com o servidor" });
         }
     },
     upadate: async (req, res) => {
@@ -62,12 +62,11 @@ const taskController = {
             const response = await TaskModel.findByIdAndUpdate(id, task);
 
             if (!response) {
-                res.status(400).send({ msg: "O id informado não foi encontrado na base!" });
-                return
+                return res.status(400).send({ message: "O id informado não foi encontrado na base!" });
             }
-            res.status(200).send({ msg: "A tarefa foi alterada com sucesso!" });
+            res.status(200).send({ message: "A tarefa foi alterada com sucesso!" });
         } catch (error) {
-            res.status(500).send({ msg: "Erro ao comunicar com o servidor" });
+            res.status(500).send({ message: "Erro ao comunicar com o servidor" });
         }
     },
     delete: async (req, res) => {
@@ -75,11 +74,11 @@ const taskController = {
             const id = req.params.id;
             const response = await TaskModel.findByIdAndDelete(id);
             if (!response) {
-                response.status(400).send({ msg: "O id informado não foi encontrado na base!" });
+                response.status(400).send({ message: "O id informado não foi encontrado na base!" });
             }
-            res.status(200).send({ msg: "A tarefa foi deletada com sucesso!" });
+            res.status(200).send({ message: "A tarefa foi deletada com sucesso!" });
         } catch (error) {
-            res.status(500).send({ msg: "Erro ao comunicar com o servidor" });
+            res.status(500).send({ message: "Erro ao comunicar com o servidor" });
         }
     }
 };

@@ -6,7 +6,7 @@ function checkToken(req, res, next) {
   const authHearder = req.headers["authorization"];
   const token = authHearder && authHearder.split(" ")[1];
   if (!authHearder) {
-    return res.status(403).send({ msg: "Acesso negado" });
+    return res.status(403).send({ message: "Acesso negado" });
   }
 
   const secret = process.env.SECRET;

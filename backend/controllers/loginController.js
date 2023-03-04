@@ -12,13 +12,13 @@ const loginController = {
       );
 
       if (!user) {
-        return res.status(403).send({ user, msg: "Login inválido!" });
+        return res.status(403).send({ user, message: "Login inválido!" });
       }
 
       const checkPassword = await bcryptjs.compare(password, user.password);
 
       if (!checkPassword) {
-        return res.status(403).send({ checkPassword, msg: "Login inválido!" });
+        return res.status(403).send({ checkPassword, message: "Login inválido!" });
       }
 
       try {
@@ -29,14 +29,14 @@ const loginController = {
           },
           secret
         );
-        return res.status(200).send({ msg: "Autenticação realizada", token });
+        res.status(200).send({ message: "Autenticação realizada", token });
       } catch (error) {
-        return res.status(400).send({ msg: "Error ao fazer a autenticação" });
+        res.status(400).send({ message: "Error ao fazer a autenticação" });
       }
     } catch (error) {
-      return res
+      res
         .status(500)
-        .send({ msg: "Error ao fazer a comunicação com o servidor" });
+        .send({ message: "Error ao fazer a comunicação com o servidor" });
     }
   },
 };
